@@ -9,8 +9,8 @@ Además se implementa un programa en C que recibe los parámetros a utilizar por
 
 ### Funciones desarrolladas:
 
-*Función* enmascarar_c (unsigned char *a, unsigned char *b, unsigned char *mask, int cant);
-*Función* enmascarar_asm (unsigned char *a, unsigned char *b, unsigned char *mask, int cant);
+*Función* enmascarar_c (unsigned char *a, unsigned char *b, unsigned char *mask, int cant)
+*Función* enmascarar_asm (unsigned char *a, unsigned char *b, unsigned char *mask, int cant)
 
 ### Ejecucion del programa:
 En esta primera parte, la versión del programa ejecuta ambas funciones devolviendo las imagenes nuevas generadas. Las imagenes son obtenidas de la carpeta **"/Images"** y el resultado de los enmascarados son guardados en **"/Output"**
