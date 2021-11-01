@@ -37,7 +37,7 @@ Para ver el resultado del enmascaramiento dirijase a la carpeta output, y abra a
 
 ### Pasos de Ejecución Manual
 
-## Ejecucion Programa enmascarado en C
+#### Ejecucion Programa enmascarado en C
 
 Para compilar el codigo y generar un nuevo ejecutable se pueden ejecutar los siguientes comandos:
 
@@ -54,7 +54,7 @@ Ejemplo:
 
 *  ./maskC "avengers.bmp" "ligaj.bmp" "mascara.bmp" 1920 1080
 
-## Ejecucion Programa enmascarado en ASM
+#### Ejecucion Programa enmascarado en ASM
 
 Para compilar el codigo y generar un nuevo ejecutable se pueden ejecutar los siguientes comandos:
 
