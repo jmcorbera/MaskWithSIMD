@@ -51,7 +51,7 @@ para usar el programa ejecute el siguiente comando:
 ```
 Ejemplo:
 
-`./maskSIMD "avengers.bmp" "ligaj.bmp" "mascara.bmp" 1920 1080`
+*  ./maskSIMD "avengers.bmp" "ligaj.bmp" "mascara.bmp" 1920 1080
 
 **!ATENCION:** El alto y el ancho tienen que coincidir con el de las imagenes, de lo contrario la ejecución arrojara un error.
 observe los resultados en la carpeta output
