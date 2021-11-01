@@ -5,11 +5,11 @@ Proyecto de Enmascarado de Imágenes con SIMD
 
 Se debe implementan 2 funciones de Enmascaramiento de imágenes, una función llamada **enmascarar_c**, integramente en el lenguaje C y otra función llamada **enmascarar_asm** en lenguaje ensamblador de 32 bits usando instrucciones SIMD, la cual recibe de una aplicación en C los parámetros.  
 El funcionamiento de las lógicas en los diferentes lenguajes es el mismo, se carga la imagen principal en un buffer, luego la segunda imagen y la mascara en otros 2 buffers distintos y se debe combinar las imágenes 1 y 2 aplicandole un enmascarado. El resultado de esta combinación se guarda en el primer buffer. 
-Además se implementa un programa en C que recibe los parámetros a utilizar por línea de comandos y llama a las dos funciones para generar dos archivos (salida_c.rgb y salida_asm.rgb) que corresponden a las imágenes producidas por las dos llamadas.
+Además se implementa los programas en C (para ejecutar las funciones en C y en ASM) que reciben los parámetros a utilizar por línea de comandos y llama a las funciones para generar los archivos, salida_c.rgb (ejecución en C) y salida_asm.rgb (Ejecución de ASM) que corresponden a las imágenes producidas por las diferentes funciones.
 
 
 ## Ejecución del programa:
-El programa ejecuta ambas funciones devolviendo las imagenes nuevas generadas. Las imágenes son obtenidas de la carpeta **"/Images"** y el resultado de los enmascarados son guardados en **"/Output"**
+El programa compile.sh ejecuta ambas funciones devolviendo las imagenes nuevas generadas. Las imágenes son obtenidas de la carpeta **"/Images"** y el resultado de los enmascarados son guardados en **"/Output"**
 
 ### Pasos de Ejecución Automática
 **Pasos preeliminares** Descargue el archivo y descomprima, **ubiquese** dentro de la carpeta /MaskWithSIMD
@@ -26,7 +26,8 @@ sudo ./complie.sh
 ```
 le deberia mostrarle algo asi:
 
-![ejecutar_prueba](https://scontent.faep8-1.fna.fbcdn.net/v/t1.6435-9/252088367_10217838325984019_8172154905620179787_n.jpg?_nc_cat=106&_nc_rgb565=1&ccb=1-5&_nc_sid=730e14&_nc_ohc=uC4bpNbhobwAX-SfJpS&_nc_ht=scontent.faep8-1.fna&oh=7a06e438b39b7e892677e1d0fc33ac46&oe=61A6A0C8)
+![captura1](https://user-images.githubusercontent.com/9463666/139738998-722b277c-e505-4a44-9e50-52cec8e5bfca.png)
+![captura2](https://user-images.githubusercontent.com/9463666/139739096-d1c13a9c-d4e9-420c-bd92-7f27546a708e.png)
 
 * *Los tiempos de ejecución pueden variar de acuerdo al procesador que se esté utilizando*.
 
@@ -36,22 +37,40 @@ Para ver el resultado del enmascaramiento dirijase a la carpeta output, y abra a
 
 ### Pasos de Ejecución Manual
 
+## Ejecucion Programa enmascarado en C
+
 Para compilar el codigo y generar un nuevo ejecutable se pueden ejecutar los siguientes comandos:
 
 ```
 abra la terminal `ctrl +alt+ t`  
-
-sudo nasm -f elf32 enmascarar_asm.asm -o enmascarar_asm.o;
-sudo gcc -m32 enmascarar_c.c enmascarar_asm.o -o maskSIMD;
+sudo gcc -m32 ./Enmascarado_C/enmascarar_c.c -o maskC;
 ```
 
 para usar el programa ejecute el siguiente comando:
 ```
-`./maskSIMD "imagen1.bmp" "imagen2.bmp" "mascara.bmp" alto ancho`
+`./maskC "imagen1.bmp" "imagen2.bmp" "mascara.bmp" alto ancho`
 ```
 Ejemplo:
 
-*  ./maskSIMD "avengers.bmp" "ligaj.bmp" "mascara.bmp" 1920 1080
+*  ./maskC "avengers.bmp" "ligaj.bmp" "mascara.bmp" 1920 1080
+
+## Ejecucion Programa enmascarado en ASM
+
+Para compilar el codigo y generar un nuevo ejecutable se pueden ejecutar los siguientes comandos:
+
+```
+abra la terminal `ctrl +alt+ t`  
+sudo nasm -f elf32 ./Enmascarado_ASM/enmascarar_asm.asm -o ./Enmascarado_ASM/enmascarar_asm.o;
+sudo gcc -m32 ./Enmascarado_ASM/enmascarar_asm.c ./Enmascarado_ASM/enmascarar_asm.o -o maskASM;
+```
+
+para usar el programa ejecute el siguiente comando:
+```
+`./maskASM "imagen1.bmp" "imagen2.bmp" "mascara.bmp" alto ancho`
+```
+Ejemplo:
+
+*  ./maskASM "avengers.bmp" "ligaj.bmp" "mascara.bmp" 1920 1080
 
 **!ATENCION:** El alto y el ancho tienen que coincidir con el de las imagenes, de lo contrario la ejecución arrojara un error.
 observe los resultados en la carpeta output
@@ -86,7 +105,8 @@ Por último se implemento el código para `enmascarar_asm` desde el lado de asm
 Desde el codigo asm, se implemento una función que hace un loop teniendo en cuenta la cantidad de bytes de la variable local **cant** (cantidad de pixeles de la imagen), se ejecuta el ciclo y compara un contador con la cantidad para poder `salir` . En la ejecución de este ciclo guarda los paquetes de **a** en **mm0**, **b** en **mm1** y **mascara** en **mm2** y luego hace un AND logico entre la **mascara** y **b** (mantiene la imagen b cuando el pixel de la mascara es distinto de negro) y un AND NOT lógico entre la **mascara** y a (mantiene la imagen a cuando el pixel es distinto de FFFFFF) para finalmente poder hacer on OR lógico en entre las imagenes generadas en mm1 y mm2 (mantiene los valores altos de las 2 imagenes (pisa los blancos y negros), y finalmente cuando se termina el ciclo quedara el enmascarado en mm1.
  
 Por último continuamos con la funcion `procesarArchivos` que se encarga de llamar a las funciones, asignar buffers a las imagenes (usando malloc), inicializar variables, etc. Para la medición de los tiempos de ejecución la función hace uso de la función clock, <time.h>, que calcula cuanto tiempo le lleva a cada funcion llevar a caboel enmascarado de las imagenes.
-
+  
+Finalizando se separan las aplicaciones para que funcionen independientemente.
 
 ## Conclusiones
 hicimos 3 pruebas, cada prueba con un tamaño distinto de imagen y mascara y los resultados fueron los siguientes
