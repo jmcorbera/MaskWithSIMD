@@ -12,18 +12,14 @@ void abrirImagen(char *nombreArchivo, int tamano, unsigned char *buffer);
 void guardarImagen(char *nombreArchivo, int tamano, unsigned char *buffer);
 /* programa para lectura y escritura de imagenes rgb o ppm en C*/
 int largoimg;
-double clocKs_seg = CLOCKS_PER_SEC;
 
 int main(int argc, char *argv[])
 {
-  
-
-  if (argc != 6)
+    if (argc != 6)
   {
     printf("Error al ingresar los parametros\n");
     return 0;
   }
-
   //Parametros
   char *imagen1 = argv[1];      //imagene1
   char *imagen2 = argv[2];   //imagen2
@@ -33,12 +29,8 @@ int main(int argc, char *argv[])
  
   procesarArchivos(imagen1,imagen2,mask,ancho,alto);
 
-  
-  
-
   return 1;
 }
-
 void abrirImagen(char *nombreArchivo, int tamano, unsigned char *buffer)
 {
   char path[100];
@@ -60,13 +52,8 @@ void abrirImagen(char *nombreArchivo, int tamano, unsigned char *buffer)
       printf("PROGRAMA FINALIZADO\n");
       exit(-1);
       }
-    else {//
-      largoimg=ftell(fp);//aviso el largo
-      fseek(fp, 0L, SEEK_SET);//vuelvo al principio
-   }
   }
   
-
   if (fp == NULL)//si no existe..
   {
     printf("Error al abrir el archivo\n");
@@ -78,7 +65,6 @@ void abrirImagen(char *nombreArchivo, int tamano, unsigned char *buffer)
   
   fclose(fp);
 }
-
 
 void guardarImagen(char *nombreArchivo, int tamano, unsigned char *buffer)
 {
@@ -105,7 +91,6 @@ void enmascarar_c(unsigned char *a, unsigned char *b, unsigned char *mask, int c
 
 void procesarArchivos(char *imagen1, char *imagen2, char *mask, int ancho, int alto)
 {
-
   int cantidadxPixel = 3; //RGB 3 bytes por pixel, un byte hasta 255 por cada color R,G O B
   int cant = ancho * alto * cantidadxPixel;
 
@@ -119,7 +104,7 @@ void procesarArchivos(char *imagen1, char *imagen2, char *mask, int ancho, int a
   abrirImagen(imagen2, cant, memoriaParaImg2);
   abrirImagen(mask, cant, mascara);
 
-clock_t tiempo_inicio, tiempo_final, tmasmf , tmasm;
+clock_t tiempo_inicio, tiempo_final;
   double segundos = 0.0;
 
   tiempo_inicio = clock();
@@ -130,16 +115,12 @@ clock_t tiempo_inicio, tiempo_final, tmasmf , tmasm;
   
   printf("el tiempo de enmascarado en c es de ");
   printf("%.16g milisegundos\n", segundos * 1000.0);
-
-
   tiempo_inicio = clock();
   enmascarar_asm(memoriaParaImg1, memoriaParaImg2, mascara, cant);
-  tiempo_final = clock();
-  
-    
- segundos = ( double)(tiempo_final - tiempo_inicio) / CLOCKS_PER_SEC;
- segundos = ( double)(tiempo_final - tiempo_inicio) / CLOCKS_PER_SEC;
- printf("tiempo de enmascarado en asm %.16g milisegundos\n", segundos *1000.0);
+  tiempo_final = clock();   
+  segundos = ( double)(tiempo_final - tiempo_inicio) / CLOCKS_PER_SEC;
+  segundos = ( double)(tiempo_final - tiempo_inicio) / CLOCKS_PER_SEC;
+  printf("tiempo de enmascarado en asm %.16g milisegundos\n", segundos *1000.0);
   guardarImagen("salida_c.rgb", cant, memoriaParaImg1);
   guardarImagen("salida_asm.rgb", cant, memoriaParaImg1);
 
@@ -148,9 +129,9 @@ clock_t tiempo_inicio, tiempo_final, tmasmf , tmasm;
   free(memoriaParaImg2);
   free(mascara);
 }
-
 //para probar.
-//gcc imagen.c -o a.out
-//./a.out avengers.bmp ligaj.bmp mascara.bmp 1920 1080
+//sudo nasm -f elf32 enmascarar_asm.asm -o enmascarar_asm.o
+//sudo gcc -m32 enmascarar_c.c enmascarar_asm.o -o maskSIMD
+//./maskSIMD "avengers.bmp" "ligaj.bmp" "mascara.bmp" 1920 1080
 //va producir un archivo llamado "imagen_c.rgb"
 //abrir y ver resultados.
