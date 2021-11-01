@@ -24,6 +24,14 @@ abra la terminal `ctrl+alt+t`
 ingrese el siguiente comando:
 sudo ./complie.sh
 ```
+
+O ejecute los programas por separados
+
+```
+sudo ./ScriptC.sh
+sudo ./ScriptASM.sh
+```
+
 le deberia mostrarle algo asi:
 
 ![captura1](https://user-images.githubusercontent.com/9463666/139738998-722b277c-e505-4a44-9e50-52cec8e5bfca.png)
