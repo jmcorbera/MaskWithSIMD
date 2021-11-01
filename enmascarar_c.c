@@ -32,39 +32,36 @@ int main(int argc, char *argv[])
   return 1;
 }
 void abrirImagen(char *nombreArchivo, int tamano, unsigned char *buffer)
-{
-  char path[100];
+{ char path[100];
   strcpy(path, "images/"); 
   strcat(path, nombreArchivo);
   printf("abriendo el archivo %s\n", path);
-
   FILE *fp;
   fp = fopen(path, "rb");//indicamos lectura
   fseek(fp,0L,SEEK_END);//voy al inicio del archivo
   if (largoimg==0){
     largoimg=ftell(fp);//aviso el largo
     fseek(fp, 0L, SEEK_SET);//vuelvo al principio
-    
-  }
+      }
   else if (largoimg!=0){
-    if(largoimg!=ftell(fp)){
+    if(largoimg!=ftell(fp)){//si el largo de la imagen1 es diferente de la imagen2...
       printf("ERROR:los archivos no tienen el mismo tamaño\n");
       printf("PROGRAMA FINALIZADO\n");
       exit(-1);
       }
+      else {//
+      largoimg=ftell(fp);//aviso el largo
+      fseek(fp, 0L, SEEK_SET);//vuelvo al principio
+   }
   }
-  
-  if (fp == NULL)//si no existe..
+    if (fp == NULL)//si no existe..
   {
     printf("Error al abrir el archivo\n");
   }
   else
   {
     fread(buffer, tamano, 1, fp);
-  }
-  
-  fclose(fp);
-}
+  }fclose(fp);}
 
 void guardarImagen(char *nombreArchivo, int tamano, unsigned char *buffer)
 {
@@ -115,13 +112,15 @@ clock_t tiempo_inicio, tiempo_final;
   
   printf("el tiempo de enmascarado en c es de ");
   printf("%.16g milisegundos\n", segundos * 1000.0);
+  guardarImagen("salida_c.rgb", cant, memoriaParaImg1);
+
   tiempo_inicio = clock();
   enmascarar_asm(memoriaParaImg1, memoriaParaImg2, mascara, cant);
   tiempo_final = clock();   
   segundos = ( double)(tiempo_final - tiempo_inicio) / CLOCKS_PER_SEC;
   segundos = ( double)(tiempo_final - tiempo_inicio) / CLOCKS_PER_SEC;
   printf("tiempo de enmascarado en asm %.16g milisegundos\n", segundos *1000.0);
-  guardarImagen("salida_c.rgb", cant, memoriaParaImg1);
+ 
   guardarImagen("salida_asm.rgb", cant, memoriaParaImg1);
 
   //Liberar memoria
