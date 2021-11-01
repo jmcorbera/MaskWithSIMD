@@ -116,7 +116,7 @@ Por último continuamos con la funcion `procesarArchivos` que se encarga de llam
   
 Finalizando se separan las aplicaciones para que funcionen independientemente.
   
-PD. el siguiente lin fue de mucha ayuda para el enmascarado en assembler
+PD. el siguiente link fue de mucha ayuda para el enmascarado en assembler
   
 * https://www.intel.com/content/dam/develop/external/us/en/documents/mmx-app-filter-median-140701.pdf
 
