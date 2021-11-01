@@ -12,13 +12,11 @@ void abrirImagen(char *nombreArchivo, int tamano, unsigned char *buffer);
 void guardarImagen(char *nombreArchivo, int tamano, unsigned char *buffer);
 /* programa para lectura y escritura de imagenes rgb o ppm en C*/
 int largoimg;
+double clocKs_seg = CLOCKS_PER_SEC;
 
 int main(int argc, char *argv[])
 {
-  clock_t tiempo_inicio, tiempo_final;
-  double segundos = 0.0;
-
-  tiempo_inicio = clock();
+  
 
   if (argc != 6)
   {
@@ -35,11 +33,10 @@ int main(int argc, char *argv[])
  
   procesarArchivos(imagen1,imagen2,mask,ancho,alto);
 
-  tiempo_final = clock();
-  segundos = (double)(tiempo_final - tiempo_inicio); 
-  printf("%.16g milisegundos\n", segundos * 1000.0);
+  
+  
 
-  return 0;
+  return 1;
 }
 
 void abrirImagen(char *nombreArchivo, int tamano, unsigned char *buffer)
@@ -63,7 +60,7 @@ void abrirImagen(char *nombreArchivo, int tamano, unsigned char *buffer)
       printf("PROGRAMA FINALIZADO\n");
       exit(-1);
       }
-    else {
+    else {//
       largoimg=ftell(fp);//aviso el largo
       fseek(fp, 0L, SEEK_SET);//vuelvo al principio
    }
@@ -122,9 +119,27 @@ void procesarArchivos(char *imagen1, char *imagen2, char *mask, int ancho, int a
   abrirImagen(imagen2, cant, memoriaParaImg2);
   abrirImagen(mask, cant, mascara);
 
-  enmascarar_c(memoriaParaImg1, memoriaParaImg2, mascara, cant);
-  enmascarar_asm(memoriaParaImg1, memoriaParaImg2, mascara, cant);
+clock_t tiempo_inicio, tiempo_final, tmasmf , tmasm;
+  double segundos = 0.0;
 
+  tiempo_inicio = clock();
+
+  enmascarar_c(memoriaParaImg1, memoriaParaImg2, mascara, cant);
+ tiempo_final = clock();
+  segundos = ( double)(tiempo_final - tiempo_inicio) / CLOCKS_PER_SEC;
+  
+  printf("el tiempo de enmascarado en c es de ");
+  printf("%.16g milisegundos\n", segundos * 1000.0);
+
+
+  tiempo_inicio = clock();
+  enmascarar_asm(memoriaParaImg1, memoriaParaImg2, mascara, cant);
+  tiempo_final = clock();
+  
+    
+ segundos = ( double)(tiempo_final - tiempo_inicio) / CLOCKS_PER_SEC;
+ segundos = ( double)(tiempo_final - tiempo_inicio) / CLOCKS_PER_SEC;
+ printf("tiempo de enmascarado en asm %.16g milisegundos\n", segundos *1000.0);
   guardarImagen("salida_c.rgb", cant, memoriaParaImg1);
   guardarImagen("salida_asm.rgb", cant, memoriaParaImg1);
 
