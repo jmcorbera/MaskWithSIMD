@@ -28,7 +28,7 @@ le deberia mostrarle algo asi:
 
 ![ejecutar_prueba](https://scontent.faep8-1.fna.fbcdn.net/v/t1.6435-9/252088367_10217838325984019_8172154905620179787_n.jpg?_nc_cat=106&_nc_rgb565=1&ccb=1-5&_nc_sid=730e14&_nc_ohc=uC4bpNbhobwAX-SfJpS&_nc_ht=scontent.faep8-1.fna&oh=7a06e438b39b7e892677e1d0fc33ac46&oe=61A6A0C8)
 
-*Los tiempos de ejecución pueden variar de acuerdo al procesador que se esté utilizandp.
+* *Los tiempos de ejecución pueden variar de acuerdo al procesador que se esté utilizando*.
 
 Para ver el resultado del enmascaramiento dirijase a la carpeta output, y abra alguno de los dos archivos, deberia quedar asi:
 
