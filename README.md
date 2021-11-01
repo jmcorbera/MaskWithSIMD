@@ -115,6 +115,10 @@ Desde el codigo asm, se implemento una función que hace un loop teniendo en cue
 Por último continuamos con la funcion `procesarArchivos` que se encarga de llamar a las funciones, asignar buffers a las imagenes (usando malloc), inicializar variables, etc. Para la medición de los tiempos de ejecución la función hace uso de la función clock, <time.h>, que calcula cuanto tiempo le lleva a cada funcion llevar a caboel enmascarado de las imagenes.
   
 Finalizando se separan las aplicaciones para que funcionen independientemente.
+  
+PD. el siguiente lin fue de mucha ayuda para el enmascarado en assembler
+  
+* https://www.intel.com/content/dam/develop/external/us/en/documents/mmx-app-filter-median-140701.pdf
 
 ## Conclusiones
 hicimos 3 pruebas, cada prueba con un tamaño distinto de imagen y mascara y los resultados fueron los siguientes
