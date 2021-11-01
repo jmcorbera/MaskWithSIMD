@@ -8,7 +8,7 @@ El funcionamiento de las lógicas en los diferentes lenguajes es el mismo, se ca
 Además se implementa un programa en C que recibe los parámetros a utilizar por línea de comandos y llama a las dos funciones para generar dos archivos (salida_c.rgb y salida_asm.rgb) que corresponden a las imágenes producidas por las dos llamadas.
 
 
-### Ejecución del programa:
+## Ejecución del programa:
 El programa ejecuta ambas funciones devolviendo las imagenes nuevas generadas. Las imágenes son obtenidas de la carpeta **"/Images"** y el resultado de los enmascarados son guardados en **"/Output"**
 
 ### Pasos de Ejecución Automática
@@ -60,7 +60,7 @@ observe los resultados en la carpeta output
 
 si **quiere ejecutar el programa** con alguna otra imagen de su galeria personal, debe asegurarse de que las imagenes y mascara tengan el mismo tamaño. Coloque las imagenes deseadas en la carpeta **image/**
 
-### Informe
+## Informe
 En primera instancia se comenzó por el desarrollo de la aplicación en C, las primeras funcionalidades que se desarrollaron fueran las que se utilizan para abrir las imagenes, para cerrarlas y guardarlas.
 
 ![abrir imagen](https://scontent.faep8-2.fna.fbcdn.net/v/t1.6435-9/251482470_10217838023016445_1032772892767641671_n.jpg?_nc_cat=102&_nc_rgb565=1&ccb=1-5&_nc_sid=730e14&_nc_ohc=22D1ZSXBUiYAX8vLBPB&_nc_ht=scontent.faep8-2.fna&oh=5ad428089217c07c13195a8577e7403c&oe=61A6AAC9)
@@ -88,7 +88,7 @@ Desde el codigo asm, se implemento una función que hace un loop teniendo en cue
 Por último continuamos con la funcion `procesarArchivos` que se encarga de llamar a las funciones, asignar buffers a las imagenes (usando malloc), inicializar variables, etc. Para la medición de los tiempos de ejecución la función hace uso de la función clock, <time.h>, que calcula cuanto tiempo le lleva a cada funcion llevar a caboel enmascarado de las imagenes.
 
 
-### Conclusiones
+## Conclusiones
 hicimos 3 pruebas, cada prueba con un tamaño distinto de imagen y mascara y los resultados fueron los siguientes
   
  ![graficos](https://scontent.faep8-1.fna.fbcdn.net/v/t1.6435-9/251873397_10217838780315377_4266679851793519300_n.jpg?_nc_cat=105&_nc_rgb565=1&ccb=1-5&_nc_sid=730e14&_nc_ohc=naF06mLAOxYAX8MybQ6&tn=HE71w9qu0gGBze0U&_nc_ht=scontent.faep8-1.fna&oh=17eb5c5fe9cc0953b027ad13b7d79014&oe=61A41432)
