@@ -49,6 +49,7 @@ _ahora el programa ha compilado, ya esta listo para usar!_
 para usar ejecute el siguiente comando:
 
 `./maskSIMD "suprimerimagen.bmp" "susegundaimagen.bmp" "sumascara.bmp" alto ancho`
+
 **!ATENCION:** EN  LUGAR DE "suprimerimagen" debe reemplazar por el verdadero nombre del archivo/imagen en formato bmp, que usted esta intentando enmascarar, lo mismo para "usegundaimagen" y "sumascara" , en alto y ancho reemplace por el alto y ancho.
 
 por ejemplo:
