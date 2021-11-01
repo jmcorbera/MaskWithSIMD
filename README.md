@@ -86,8 +86,9 @@ Finalmente continuamos con la funcion `procesarArchivos` que se encarga de conec
 ### Conclusiones
 hicimos 3 pruebas cada prueba con un tamaño distinto de imagen y mascara y los resultados fueron los siguientes
   
- ![graficos](https://scontent.faep8-1.fna.fbcdn.net/v/t1.6435-9/251462088_10217838484627985_5182467124587804072_n.jpg?_nc_cat=101&_nc_rgb565=1&ccb=1-5&_nc_sid=730e14&_nc_ohc=4Ju3Fj6l38sAX-m_tDG&_nc_ht=scontent.faep8-1.fna&oh=bd474a18d7f487cf1ab8c3e1161e8e97&oe=61A5F593)
+ ![graficos](https://scontent.faep8-1.fna.fbcdn.net/v/t1.6435-9/251873397_10217838780315377_4266679851793519300_n.jpg?_nc_cat=105&_nc_rgb565=1&ccb=1-5&_nc_sid=730e14&_nc_ohc=naF06mLAOxYAX8MybQ6&tn=HE71w9qu0gGBze0U&_nc_ht=scontent.faep8-1.fna&oh=17eb5c5fe9cc0953b027ad13b7d79014&oe=61A41432)
  
+  link al [grafico](https://docs.google.com/spreadsheets/d/e/2PACX-1vSaXXvnTpx8s7szfz8n3vajmtvT0GrOuswb9Y2VAvWH2cvRYvbclIyvVLLaB8zYjrkwZpgrWsa3VGZt/pubchart?oid=1087145314&format=interactive) interactivo.
  Como se puede observar, la funcion en asm,usando mmx ( la extension SIMD de ia32) es mas veloz y eficiente que la programada en c que tarda mas,  con una diferencia de hasta 5 veces mayor. De esta manera podemos concluir que al usar paralelismo de datos podemos hacer un programa ligero.
  
   
